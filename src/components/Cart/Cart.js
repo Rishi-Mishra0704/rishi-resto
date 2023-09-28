@@ -29,16 +29,18 @@ const Cart = (props) => {
     console.log("userData:", userData);
     await fetch("http://localhost:4000/orders", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        orderedItems: CartCtx.items,
         user: {
           name: userData.name,
           street: userData.street,
           postal: userData.postal,
           city: userData.city,
         },
-        orderedItems: CartCtx.items,
-      }),
+      }),      
     });
+    console.log("orderedItems:", CartCtx.items);
     setIsSubmitting(false);
     setDidSubmit(true);
     CartCtx.clearCart();
