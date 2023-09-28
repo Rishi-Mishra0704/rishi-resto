@@ -8,7 +8,7 @@ const AvailableMeals = () => {
   const [isLoading,setIsLoading] = useState(true)
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch("https://rishi-resto-default-rtdb.firebaseio.com/meals.json");
+      const response = await fetch("http://localhost:4000/meals");
       const responseData = await response.json();
     
       const loadMeals = [];
