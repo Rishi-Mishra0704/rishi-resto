@@ -26,20 +26,24 @@ const Cart = (props) => {
 
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
-    await fetch(
-      "https://rishi-resto-default-rtdb.firebaseio.com/orders.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          user: userData,
-          orderedItems: CartCtx.items,
-        }),
-      }
-    );
+    console.log("userData:", userData);
+    await fetch("http://localhost:4000/orders", {
+      method: "POST",
+      body: JSON.stringify({
+        user: {
+          name: userData.name,
+          street: userData.street,
+          postal: userData.postal,
+          city: userData.city,
+        },
+        orderedItems: CartCtx.items,
+      }),
+    });
     setIsSubmitting(false);
     setDidSubmit(true);
     CartCtx.clearCart();
   };
+
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {CartCtx.items.map((item) => (
@@ -82,12 +86,13 @@ const Cart = (props) => {
   const isSubmittingModalContent = <p>Sending order data...</p>;
   const didSubmitModalContent = (
     <Fragment>
-      <p>Successfully the order !! 
-      <div className={classes.actions}>
-      <button className={classes.button} onClick={props.onClose}>
-        Close
-      </button>
-    </div>
+      <p>
+        Successfully the order !!
+        <div className={classes.actions}>
+          <button className={classes.button} onClick={props.onClose}>
+            Close
+          </button>
+        </div>
       </p>
     </Fragment>
   );
