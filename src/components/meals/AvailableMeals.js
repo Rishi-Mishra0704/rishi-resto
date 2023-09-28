@@ -9,7 +9,7 @@ const AvailableMeals = () => {
 
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch("http://localhost:4000/meals");
+      const response = await fetch("https://resto-backend.cyclic.cloud/meals");
       const responseData = await response.json();
 
       // Assuming responseData is an array with a single object
