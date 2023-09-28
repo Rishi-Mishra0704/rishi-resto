@@ -27,7 +27,7 @@ const Cart = (props) => {
   const submitOrderHandler = async (userData) => {
     setIsSubmitting(true);
     console.log("userData:", userData);
-    await fetch("http://localhost:4000/orders", {
+    await fetch("https://resto-backend.cyclic.cloud/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
